@@ -1,0 +1,23 @@
+{
+    "name": "ts-knight",
+    "version": "1.0.0",
+    "description": "A terminal based dungeon crawler using typescript",
+    "main": "src/App.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon --config nodemon.json src/App.ts --no-stdin"
+    },
+    "author": "paulasantamaria",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^15.14.9",
+        "@types/tmi.js": "^1.7.2",
+        "nodemon": "^2.0.12",
+        "ts-node": "^10.2.1",
+        "typescript": "^4.4.3"
+    },
+    "dependencies": {
+        "dotenv": "^10.0.0",
+        "tmi.js": "^1.8.5"
+    }
+}
