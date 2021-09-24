@@ -1,17 +1,23 @@
 {
-    "name": "ts-knight",
+    "name": "acho-bot",
     "version": "1.0.0",
-    "description": "A terminal based dungeon crawler using typescript",
+    "description": "A bot for Twitch",
     "main": "src/App.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon --config nodemon.json src/App.ts --no-stdin"
+        "start": "nodemon --config nodemon.json src/App.ts --no-stdin",
+        "compile": "tsc",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix"
     },
     "author": "paulasantamaria",
     "license": "ISC",
     "devDependencies": {
         "@types/node": "^15.14.9",
         "@types/tmi.js": "^1.7.2",
+        "@typescript-eslint/eslint-plugin": "^4.31.2",
+        "@typescript-eslint/parser": "^4.31.2",
+        "eslint": "^7.32.0",
         "nodemon": "^2.0.12",
         "ts-node": "^10.2.1",
         "typescript": "^4.4.3"
