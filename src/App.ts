@@ -13,7 +13,7 @@ const app = ServerInit.init();
 app.use('/api/twitch/auth', TwitchAuthController.routes());
 app.use('/api/status', StatusController.routes());
 
-app.listen(5000, async function () {
+app.listen(process.env.PORT, async function () {
     console.info(`AchoBot running on port ${process.env.PORT}`);
 	
     console.info('Attempting to start TMI client...');
