@@ -3,7 +3,7 @@ import * as session from 'express-session';
 import * as passport from 'passport';
 import * as OAuth2Strategy from 'passport-oauth2';
 import * as FlatCache from 'flat-cache';
-import TwitchService from './services/twitch.service';
+import { TwitchService } from './services/twitch.service';
 
 export default class ServerInit {
     static init(): express.Express {
@@ -15,11 +15,7 @@ export default class ServerInit {
         app.use(passport.initialize());
         app.use(passport.session());
 
-        const twitchService = new TwitchService({
-            clientId: process.env.TWITCH_BOT_CLIENTID!,
-            clientSecret: process.env.TWITCH_BOT_CLIENTSECRET!,
-            redirectUri: process.env.TWITCH_BOT_REDIRECTURI!
-        });
+        const twitchService = new TwitchService();
 
         OAuth2Strategy.prototype.userProfile = function (accessToken, done) {
             twitchService.getUserProfile(accessToken)

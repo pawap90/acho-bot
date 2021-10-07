@@ -1,4 +1,5 @@
-import { FetchBuilder, FetchBuilderError } from '../engine/fetch.builder';
+import { FetchBuilder, FetchBuilderError } from '../utils/fetch.builder';
+import CacheService from './cache.service';
 
 type TwitchConfig = {
     clientId: string,
@@ -6,7 +7,7 @@ type TwitchConfig = {
     redirectUri: string
 }
 
-export default class TwitchService {
+export class TwitchService {
 
     readonly config: TwitchConfig;
 
@@ -17,8 +18,12 @@ export default class TwitchService {
         GET_USERS: 'https://api.twitch.tv/helix/users'
     };
 
-    constructor(config: TwitchConfig) {
-        this.config = config;
+    constructor(config?: TwitchConfig) {
+        this.config = config ?? {
+            clientId: process.env.TWITCH_BOT_CLIENTID!,
+            clientSecret: process.env.TWITCH_BOT_CLIENTSECRET!,
+            redirectUri: process.env.TWITCH_BOT_REDIRECTURI!
+        }
     }
 
     async getUserProfile(accessToken: string): Promise<TwitchUser> {
@@ -32,6 +37,25 @@ export default class TwitchService {
             .execute();
 
         return result.body;
+    }
+
+    async getAccessToken(): Promise<string> {
+        const accessToken = CacheService.getAccessToken();
+
+        if (accessToken && accessToken.length > 0) {
+            const validationResult = await this.validateAccessToken(accessToken);
+
+            if (validationResult.isValid)
+                return accessToken;
+
+            const refreshToken = CacheService.getRefreshToken();
+            const tokens = await this.refreshToken(refreshToken);
+
+            CacheService.storeAccessToken(tokens.access_token);
+            CacheService.storeRefreshToken(tokens.refresh_token);
+        }
+
+        throw new TwitchAuthorizationRequiredError();
     }
 
     async validateAccessToken(accessToken: string): Promise<TwitchTokenValidation> {
@@ -53,7 +77,7 @@ export default class TwitchService {
         catch (err) {
             if (err instanceof FetchBuilderError && (err as FetchBuilderError).status == 401)
                 return { isValid: false }
-            
+
             throw err;
         }
     }
@@ -71,6 +95,14 @@ export default class TwitchService {
             .execute();
 
         return result.body;
+    }
+}
+
+export class TwitchAuthorizationRequiredError extends Error {
+    constructor(message?: string) {
+        super(message ?? 'Authorization required');
+
+        Object.setPrototypeOf(this, TwitchAuthorizationRequiredError.prototype);
     }
 }
 
