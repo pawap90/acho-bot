@@ -23,7 +23,7 @@ export default class ServerInit {
                     done(null, res);
                 })
                 .catch(err => done(err));
-        }
+        };
 
         passport.serializeUser(function (user, done) {
             done(null, user);
@@ -41,16 +41,16 @@ export default class ServerInit {
             callbackURL: twitchService.config.redirectUri,
             state: true
         },
-            function (accessToken: string, refreshToken: string, profile: any, done: OAuth2Strategy.VerifyCallback) {
-                profile.accessToken = accessToken;
-                profile.refreshToken = refreshToken;
+        function (accessToken: string, refreshToken: string, profile: any, done: OAuth2Strategy.VerifyCallback) {
+            profile.accessToken = accessToken;
+            profile.refreshToken = refreshToken;
 
-                cache.setKey('twitch-access-token', accessToken);
-                cache.setKey('twitch-refresh-token', refreshToken);
-                cache.save();
+            cache.setKey('twitch-access-token', accessToken);
+            cache.setKey('twitch-refresh-token', refreshToken);
+            cache.save();
 
-                done(null, profile);
-            }
+            done(null, profile);
+        }
         ));
 
         return app;

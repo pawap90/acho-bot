@@ -3,12 +3,12 @@ import { TwitchService } from './twitch.service';
 
 export default class TmiService {
 
-    async startClient() {
+    async startClient(): Promise<void> {
         const client = this.createClient();
 
         try {
             await client.connect();
-            console.info("TMI client connected");
+            console.info('TMI client connected');
 
             client.on('message', (channel, tags, message, self) => {
                 if (self) return;
@@ -18,7 +18,7 @@ export default class TmiService {
             });
         }
         catch (err) {
-            console.error("TMI client startup failed");
+            console.error('TMI client startup failed');
             console.error(err);
         }
     }
@@ -48,7 +48,7 @@ export default class TmiService {
             return accessToken;
         }
         catch (err) {
-            console.error("There was an error getting the access token for TMI");
+            console.error('There was an error getting the access token for TMI');
             throw err;
         }
     }
