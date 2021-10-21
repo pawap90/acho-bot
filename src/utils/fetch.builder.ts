@@ -1,4 +1,5 @@
 import fetch, { Response as FetchResponse } from 'node-fetch';
+import { HttpError } from './http.error';
 
 type FetchBuilderResult<T> = {
     ok: boolean,
@@ -7,13 +8,12 @@ type FetchBuilderResult<T> = {
     rawResponse: FetchResponse
 }
 
-export class FetchBuilderError extends Error {
-    status: number;
+export class FetchBuilderError extends HttpError {
     body: string;
     response: FetchResponse;
 
     constructor(message: string, response: FetchResponse, body: string) {
-        super(message);
+        super(message, response.status);
         
         this.status = response.status;
         this.body = body;
