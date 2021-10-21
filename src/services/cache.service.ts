@@ -25,7 +25,7 @@ export default class CacheService {
     static store<TValue>(key: string, value: TValue): void {
         const cache = FlatCache.load(this.CACHE_KEY);
         cache.setKey(key, value);
-        cache.save();
+        cache.save(true);
     }
 
     static get<TValue>(key: string): TValue {
