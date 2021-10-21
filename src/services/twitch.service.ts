@@ -39,7 +39,7 @@ export class TwitchService {
         return result.body;
     }
 
-    async getAccessToken(): Promise<string> {
+    async getValidAccessToken(): Promise<string> {
         const accessToken = CacheService.getAccessToken();
 
         if (accessToken && accessToken.length > 0) {
@@ -49,7 +49,7 @@ export class TwitchService {
                 return accessToken;
 
             const refreshToken = CacheService.getRefreshToken();
-            const tokens = await this.refreshToken(refreshToken);
+            const tokens = await this.generateNewAccessToken(refreshToken);
 
             CacheService.storeAccessToken(tokens.access_token);
             CacheService.storeRefreshToken(tokens.refresh_token);
@@ -82,7 +82,7 @@ export class TwitchService {
         }
     }
 
-    async refreshToken(refreshToken: string): Promise<TwitchToken> {
+    async generateNewAccessToken(refreshToken: string): Promise<TwitchToken> {
 
         let endpoint = TwitchService.endpoints.OAUTH_TOKEN;
         endpoint += `?client_id=${this.config.clientId}`;

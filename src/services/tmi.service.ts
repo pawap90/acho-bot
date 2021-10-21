@@ -13,7 +13,10 @@ export default class TmiService {
             client.on('message', (channel, tags, message, self) => {
                 if (self) return;
                 if (message.toLowerCase() === '!hello') {
-                    client.say(channel, `@${tags.username}, !`);
+                    client.say(channel, `Hello worlf!`);
+                }
+                else if (message.startsWith("!")) {
+                    console.info(`@${tags.username} said ${message}`);
                 }
             });
         }
@@ -44,7 +47,7 @@ export default class TmiService {
         const twitchService = new TwitchService();
 
         try {
-            const accessToken = await twitchService.getAccessToken();
+            const accessToken = await twitchService.getValidAccessToken();
             return accessToken;
         }
         catch (err) {

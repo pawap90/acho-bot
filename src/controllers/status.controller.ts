@@ -7,9 +7,9 @@ export default class StatusController {
         const router = Router();
         const twitchService = new TwitchService();
 
-        router.get('/', async (req, res) => {
+        router.get('/', async (req, res, next) => {
             try {
-                await twitchService.getAccessToken();
+                await twitchService.getValidAccessToken();
 
                 res.json({ message: 'Ready to chat' });
             }
@@ -17,7 +17,7 @@ export default class StatusController {
                 if (err instanceof TwitchAuthorizationRequiredError)
                     res.json({ message: 'AchoBot requires authorization' }).status(401);
 
-                res.json({ message: 'Error validating token' }).status(500);
+                next(err);
             }
         });
 
