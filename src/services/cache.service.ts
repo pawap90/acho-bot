@@ -5,7 +5,7 @@ export default class CacheService {
     private static readonly CACHE_KEY = 'acho-bot-cache';
     private static readonly TWITCH_ACCESSTOKEN_KEY = 'twitch-access-token';
     private static readonly TWITCH_REFRESHTOKEN_KEY = 'twitch-refresh-token';
-
+    
     static storeAccessToken(accessToken: string): void {
         this.store(this.TWITCH_ACCESSTOKEN_KEY, accessToken);
     }
@@ -36,6 +36,7 @@ export default class CacheService {
     }
 
     static clearAll(): void {
-        FlatCache.clearAll();
+        const cache = FlatCache.load(this.CACHE_KEY);
+        cache.removeCacheFile();
     }
 }
