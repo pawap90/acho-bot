@@ -1,23 +1,42 @@
-import { Client as TmiClient, ChatUserstate as TmiChatUserState } from 'tmi.js';
+import { Client as TmiClient, ChatUserstate as TmiChatUserState } from 'tmi.js'
+import CacheService from '../services/cache.service';
 
 export interface ITmiCommand {
-    execute(channel: string, client: TmiClient, tags: TmiChatUserState): void
+    //name: string, // !hello or !vscodeTheme 
+    execute(channel: string, client: TmiClient, tags: TmiChatUserState): void;
 }
 
-interface TmiCommandDictionary { [command: string]: ITmiCommand }
+export type TmiCommandDictionary = { [key: string]: ITmiCommand }
 
 export class TmiCommandManager {
-    private commands: TmiCommandDictionary = {};
+    private readonly commandCacheKey = 'chatbot-commands';
 
-    register(options: { commands?: TmiCommandDictionary, command?: { command: string, handler: ITmiCommand } }) {
-        if (options.commands)
-            this.commands = options.commands;
+    private _commands: TmiCommandDictionary = {};
 
-        if (options.command)
-            this.commands[options.command.command] = options.command.handler;
+    constructor() {
+        //this._commands = CacheService.get<TmiCommandDictionary>(this.commandCacheKey);
     }
 
-    getCommand(command: string): ITmiCommand {
-        return this.commands[command];
+    get commands(): TmiCommandDictionary {
+        return this._commands;
+    }
+
+    private set commands(commands: TmiCommandDictionary) {
+        this._commands = commands;
+    }
+
+    register(commanDetail?: { key: string, command: ITmiCommand }, commands?: TmiCommandDictionary): void {
+        if (!this._commands) this._commands = {};
+
+        if (commands)
+            this.commands = commands;
+        else if (commanDetail)
+            this._commands[commanDetail.key] = commanDetail.command;
+
+        CacheService.store<TmiCommandDictionary>(this.commandCacheKey, this._commands);
+    }
+
+    getCommand(name: string): ITmiCommand {
+        return this._commands[name];
     }
 }
