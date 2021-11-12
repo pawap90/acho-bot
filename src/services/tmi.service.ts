@@ -1,7 +1,13 @@
-import * as tmi from 'tmi.js';
+import { Client as TmiClient } from 'tmi.js';
+import { TmiCommandManager } from '../commands/tmi-command.manager';
 import { TwitchService } from './twitch.service';
 
 export default class TmiService {
+    private readonly commandManager: TmiCommandManager;
+
+    constructor(commandManager: TmiCommandManager) {
+        this.commandManager = commandManager;
+    }
 
     async startClient(): Promise<void> {
         const client = this.createClient();
@@ -12,11 +18,10 @@ export default class TmiService {
 
             client.on('message', (channel, tags, message, self) => {
                 if (self) return;
-                if (message.toLowerCase() === '!hello') {
-                    client.say(channel, `Hello worlf!`);
-                }
-                else if (message.startsWith("!")) {
-                    console.info(`@${tags.username} said ${message}`);
+
+                const command = this.commandManager.getCommand(message.toLowerCase().trim());
+                if (command) {
+                    command.execute(channel, client, tags);
                 }
             });
         }
@@ -26,8 +31,8 @@ export default class TmiService {
         }
     }
 
-    private createClient(): tmi.Client {
-        const client = new tmi.Client({
+    private createClient(): TmiClient {
+        const client = new TmiClient({
             options: { debug: process.env.TMI_DEBUG ? true : false, messagesLogLevel: process.env.TMI_LOGLEVEL },
             connection: {
                 reconnect: true,
