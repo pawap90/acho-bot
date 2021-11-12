@@ -1,36 +1,30 @@
 import * as dotenv from 'dotenv';
-
-import ServerInit from './server-init';
-import TwitchAuthController from './controllers/twitch-auth.controller';
-import StatusController from './controllers/status.controller';
-import TmiService from './services/tmi.service';
-import { NotionService } from './services/notion.service';
 import { TmiCommandManager } from './commands/tmi-command.manager';
-import { AchobotDynamicCommand } from './commands/achobot.dynamic.command';
+
+import StatusController from './controller/status.controller';
+import TwitchAuthController from './controller/twitch-auth.controller';
+import HomeController from './controller/home.controller';
+
+import { NotionCommandsLoader } from './services/notion-commands-loader.service';
+import Server from './server';
+import TmiService from './services/tmi.service';
 
 dotenv.config();
 
-const app = ServerInit.init({
+const app = Server.init({
     '/api/twitch/auth': TwitchAuthController.routes(),
-    '/api/status': StatusController.routes()
+    '/api/status': StatusController.routes(),
+    '/': HomeController.routes()
 });
 
 app.listen(process.env.PORT, async function () {
-    console.info(`AchoBot running on port ${process.env.PORT}`);
+    console.info('App running. Port: ' + process.env.PORT);
 
-    console.info('Attempting to start TMI client...');
-    await new TmiService().startClient();
-
-    const notionCommands = await new NotionService().getDatabasePage<{ Command: string, Response: string }>(process.env.NOTION_DB!);
     const commandManager = new TmiCommandManager();
-    for (const key in notionCommands) {
-        const command = notionCommands[key];
-        commandManager.register({
-            command: {
-                command: command.Command,
-                handler: new AchobotDynamicCommand(command)
-            }
-        })
-    }
+    const notionCommands = await NotionCommandsLoader.load();
+
+    if (Object.keys(commandManager.commands).length == 0) commandManager.register(undefined, notionCommands);
+
+    await new TmiService(commandManager).startClient();
 });
 
