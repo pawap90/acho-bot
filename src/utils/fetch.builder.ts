@@ -15,7 +15,6 @@ export class FetchBuilderError extends HttpError {
     constructor(message: string, response: FetchResponse, body: string) {
         super(message, response.status);
         
-        this.status = response.status;
         this.body = body;
         this.response = response;
         Object.setPrototypeOf(this, FetchBuilderError.prototype);
