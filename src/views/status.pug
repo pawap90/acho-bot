@@ -1,0 +1,24 @@
+style. 
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: small;
+    }
+    .green {
+        color: green;
+    }
+    .red {
+        color: red;
+    }
+
+if status == 200
+    p.green AchoBot is ready to chat!
+else if status == 401
+    p.red AchoBot requires authorization
+else
+    p.red AchoBot authorization failed (Status: #{status})
+
+script. 
+    setTimeout(function(){
+        location.reload(true);
+    }, 60000)
