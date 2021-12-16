@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv';
 import { TmiCommandManager } from './commands/tmi-command.manager';
 
-import StatusController from './controller/status.controller';
-import TwitchAuthController from './controller/twitch-auth.controller';
-import HomeController from './controller/home.controller';
+import StatusController from './controllers/status.controller';
+import TwitchAuthController from './controllers/twitch-auth.controller';
+import HomeController from './controllers/home.controller';
 
 import { NotionCommandsLoader } from './services/notion-commands-loader.service';
 import Server from './server';
