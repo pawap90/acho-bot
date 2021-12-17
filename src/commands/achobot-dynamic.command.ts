@@ -1,20 +1,22 @@
 import { Client, ChatUserstate } from "tmi.js";
 import { ITmiCommand } from "./tmi-command.manager";
 
-export class AchoBotDynamicCommand implements ITmiCommand {
-    readonly response: string;
+export abstract class AchoBotDynamicCommand implements ITmiCommand {
     private permissions: string[];
 
-    constructor(response: string, permissions?: string[]) {
-        this.response = response;
+    constructor(permissions?: string[]) {
         this.permissions = permissions ?? [];
     }
+
+    protected abstract createResponse(channel: string, tags: ChatUserstate): string;
 
     execute(channel: string, client: Client, tags: ChatUserstate): void {
         const userPermissions = this.getUserPermissions(client, channel, tags.username);
 
-        if (this.permissions.length == 0 || userPermissions.some(permission => this.permissions.indexOf(permission) >= 0))
-            client.say(channel, this.response);
+        if (this.permissions.length == 0 || userPermissions.some(permission => this.permissions.indexOf(permission) >= 0)) {
+            const response = this.createResponse(channel, tags);
+            client.say(channel, response);
+        }
         else
             client.say(channel, 'Not enough permissions');
     }
