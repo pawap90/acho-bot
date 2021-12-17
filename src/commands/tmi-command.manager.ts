@@ -33,7 +33,7 @@ export class TmiCommandManager {
         else if (commanDetail)
             this._commands[commanDetail.key] = commanDetail.command;
 
-        CacheService.store<TmiCommandDictionary>(this.commandCacheKey, this._commands);
+        //CacheService.store<TmiCommandDictionary>(this.commandCacheKey, this._commands);
     }
 
     getCommand(name: string): ITmiCommand {
