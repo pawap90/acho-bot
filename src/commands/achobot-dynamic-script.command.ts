@@ -1,22 +1,23 @@
 import { ChatUserstate } from "tmi.js";
 import { JsRunner } from "../utils/js.runner";
 import Vm2Manager from "../utils/vm2.manager";
-import { AchoBotDynamicCommand } from "./achobot-dynamic.command"
+import { AchoBotDynamicCommand, CommandParams } from "./achobot-dynamic.command"
 
 export default class AchoBotDynamicScriptCommand extends AchoBotDynamicCommand {
 
     private jsRunner: JsRunner;
 
-    constructor(response: string, permissions?: string[]) {
-        super(permissions);
+    constructor(definition: string, response: string, permissions?: string[]) {
+        super(definition, permissions);
 
         this.jsRunner = new JsRunner(Vm2Manager.getInstance().vm, response);
         this.jsRunner.compile();
     }
 
-    protected createResponse(channel: string, tags: ChatUserstate): string {
+    protected createResponse(channel: string, tags: ChatUserstate, params: CommandParams): string {
 
         const context: CommandContext = {
+            params,
             channel: channel,
             username: tags.username
         };
@@ -26,6 +27,7 @@ export default class AchoBotDynamicScriptCommand extends AchoBotDynamicCommand {
 }
 
 type CommandContext = {
+    params: CommandParams,
     username?: string,
     channel: string
 }

@@ -3,8 +3,8 @@ import { AchoBotDynamicCommand } from "./achobot-dynamic.command"
 export default class AchoBotDynamicTextCommand extends AchoBotDynamicCommand {
     private response: string;
 
-    constructor(response: string, permissions?: string[]) {
-        super(permissions);
+    constructor(definition: string, response: string, permissions?: string[]) {
+        super(definition, permissions);
         this.response = response;
     }
 
