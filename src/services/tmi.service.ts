@@ -21,7 +21,13 @@ export default class TmiService {
 
                 const command = this.commandManager.getCommand(message.toLowerCase().trim());
                 if (command) {
-                    command.execute(channel, client, tags);
+                    try {
+                        command.execute(message, channel, client, tags);
+                    }
+                    catch (err) {
+                        console.error('Error executing command')
+                        console.error(err);
+                    }
                 }
             });
         }
