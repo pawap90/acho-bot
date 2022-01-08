@@ -11,20 +11,27 @@ import TmiService from './services/tmi.service';
 
 dotenv.config();
 
-const app = Server.init({
-    '/api/twitch/auth': TwitchAuthController.routes(),
-    '/api/status': StatusController.routes(),
-    '/': HomeController.routes()
-});
+// const app = Server.init({
+//     '/api/twitch/auth': TwitchAuthController.routes(),
+//     '/api/status': StatusController.routes(),
+//     '/': HomeController.routes()
+// });
 
-app.listen(process.env.PORT, async function () {
-    console.info('App running. Port: ' + process.env.PORT);
+// app.listen(process.env.PORT, async function () {
+//     console.info('App running. Port: ' + process.env.PORT);
 
+//     const commandManager = new TmiCommandManager();
+//     const notionCommands = await NotionCommandsLoader.load();
+
+//     if (Object.keys(commandManager.commands).length == 0) commandManager.register(undefined, notionCommands);
+
+//     // await new TmiService(commandManager).startClient();
+// });
+
+NotionCommandsLoader.load().then(r => {
     const commandManager = new TmiCommandManager();
-    const notionCommands = await NotionCommandsLoader.load();
 
-    if (Object.keys(commandManager.commands).length == 0) commandManager.register(undefined, notionCommands);
-
-    await new TmiService(commandManager).startClient();
+    commandManager.register(undefined, r);
+    
+    commandManager.getCommand('!rps r')?.executeConsole('!rps r', 'psantamaria');
 });
-
