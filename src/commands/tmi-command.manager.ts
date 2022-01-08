@@ -2,8 +2,10 @@ import { Client as TmiClient, ChatUserstate as TmiChatUserState } from 'tmi.js'
 import CacheService from '../services/cache.service';
 
 export interface ITmiCommand {
-    //name: string, // !hello or !vscodeTheme 
-    execute(channel: string, client: TmiClient, tags: TmiChatUserState): void;
+    /**  `!hello` or `!command {param}` */
+    definition: string, 
+    execute(message: string, channel: string, client: TmiClient, tags: TmiChatUserState): void;
+    executeConsole(message: string, channel: string): void;
 }
 
 export type TmiCommandDictionary = { [key: string]: ITmiCommand }
@@ -36,7 +38,9 @@ export class TmiCommandManager {
         //CacheService.store<TmiCommandDictionary>(this.commandCacheKey, this._commands);
     }
 
-    getCommand(name: string): ITmiCommand {
-        return this._commands[name];
+    getCommand(definition: string): ITmiCommand | undefined {
+        const name = definition.split(' ')[0];
+
+        return Object.values(this._commands).find(c => c.definition.split(' ')[0] === name);
     }
 }
