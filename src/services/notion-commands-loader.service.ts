@@ -11,8 +11,6 @@ export class NotionCommandsLoader {
 
         const commands = await new NotionService().getDatabasePage<NotionCommand>(process.env.NOTION_DATABASEID!)
 
-        // console.log(commands);
-
         const notionCommands: { [key: string]: AchoBotDynamicCommand } = {};
 
         for (let i = 0; i < commands.length; i++) {
