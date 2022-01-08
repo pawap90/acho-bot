@@ -11,7 +11,7 @@ export class NotionCommandsLoader {
 
         const commands = await new NotionService().getDatabasePage<NotionCommand>(process.env.NOTION_DATABASEID!)
 
-        console.log(commands);
+        // console.log(commands);
 
         const notionCommands: { [key: string]: AchoBotDynamicCommand } = {};
 
@@ -22,19 +22,19 @@ export class NotionCommandsLoader {
             if (command.Permissions && command.Permissions.length > 0)
                 permissions = command.Permissions.split(',');
 
-            const dynamicCommand = NotionCommandsLoader.createCommandInstance(command.Type, command.Response, permissions);
+            const dynamicCommand = NotionCommandsLoader.createCommandInstance(command, permissions);
             notionCommands[command.CommandName] = dynamicCommand;
         }
 
         return notionCommands;
     }
 
-    private static createCommandInstance(type: string, response: string, permissions: string[]): AchoBotDynamicCommand {
-        switch (type) {
+    private static createCommandInstance(command: NotionCommand, permissions: string[]): AchoBotDynamicCommand {
+        switch (command.Type) {
             case 'Text':
-                return new AchoBotDynamicTextCommand(response, permissions);
+                return new AchoBotDynamicTextCommand(command.CommandName, command.Response, permissions);
             case 'Script':
-                return new AchoBotDynamicScriptCommand(response, permissions);
+                return new AchoBotDynamicScriptCommand(command.CommandName, command.Response, permissions);
             default:
                 throw new Error('Unrecognized command type');
         }
