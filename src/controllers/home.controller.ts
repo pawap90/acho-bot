@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { NotionCommandsLoader } from "../services/notion-commands-loader.service";
 import { TwitchAuthorizationRequiredError, TwitchService } from "../services/twitch.service";
 
 export default class HomeController {
@@ -22,8 +23,9 @@ export default class HomeController {
             }
         });
 
-        router.get('/commands', async (req, res, next) => {
-            res.render('commands.pug', { commands: ['!hello', '!bye'] })
+        router.get('/commands', async (req, res, next) => {           
+
+            res.render('commands.pug', { commands: NotionCommandsLoader.getPublicCommands() })
         });
 
         return router;
