@@ -5,7 +5,6 @@ style.
         font-size: small;
         background-color: #2F364A;
         color: #f5f5f5;
-        padding: 20px;
     }
     h1 {
         color: #B468D8;
@@ -14,6 +13,7 @@ style.
         padding-top: 20px;
         border-collapse: collapse;
         font-size: small;
+        
     }
     td {
         padding-left: 20px;
@@ -26,26 +26,42 @@ style.
     code {
         font-size: medium;
     }
-    .eg {
-        color: #B468D8;
-    }
     .permissions {
         color: #B468D8;
         font-size: x-small;
         padding-left: 10px;
     }
+    #container {
+        background-color: #2F364A;
+        color: #f5f5f5;
+        width: 320px;
+        min-height: 100px;
+    }
+    .canvas {
+        border-style: solid;
+        border-color: #f5f5f5;
+        height: 320px;
+        width: 100%;
+    }
 
 h1 AchoBot Commands
+div#container
+    table
+        tbody 
+            each command in commands
+                tr 
+                    td 
+                        code #{command.CommandName}
+                        p.permissions #{command.Permissions}
+                    td #{command.Description}
 
-table
-    tbody 
-        each command in commands
-            tr 
-                td 
-                    code #{command.CommandName}
-                    p.permissions #{command.Permissions}
-                td 
-                    if command.Example && command.Example.length > 0
-                        p.eg 
-                            code #{command.Example}
-                td #{command.Description}
+h3 Download this image for your Twitch panels
+
+script(src="https://html2canvas.hertzen.com/dist/html2canvas.min.js") 
+script. 
+    const container = document.getElementById("container");
+    html2canvas(container).then(function(canvas) {
+        document.body.appendChild(canvas);
+        canvas.classList.add("canvas");
+        container.style.display = "none";
+    });
