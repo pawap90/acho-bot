@@ -51,12 +51,16 @@ export default class Server {
                 profile.accessToken = accessToken;
                 profile.refreshToken = refreshToken;
 
-                CacheService.storeRefreshToken(refreshToken);
-                CacheService.storeAccessToken(accessToken);
-
-                console.info('access token saved');
-
-                done(null, profile);
+                if (profile.data[0].login != process.env.TWITCH_BOT_USERNAME!) {
+                    // Only allow login by the account configured in the env.
+                    done(new Error('Unauthorized account'));
+                }
+                else {   
+                    CacheService.storeRefreshToken(refreshToken);
+                    CacheService.storeAccessToken(accessToken);
+    
+                     done(null, profile);
+                }
             }));
 
         for (const path in routes) {
@@ -69,7 +73,7 @@ export default class Server {
             console.error(err);
 
             if (err instanceof HttpError) // type guard
-                 res.json({ message: 'There was an error. Status code:' + err.status }).status(err.status);
+                res.json({ message: 'There was an error. Status code:' + err.status }).status(err.status);
 
             res.json({ message: 'There was an error' }).status(500);
         });
