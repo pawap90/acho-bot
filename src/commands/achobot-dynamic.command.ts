@@ -1,5 +1,5 @@
-import { Client, ChatUserstate } from "tmi.js";
-import { ITmiCommand } from "./tmi-command.manager";
+import { Client, ChatUserstate } from 'tmi.js';
+import { ITmiCommand } from './tmi-command.manager';
 
 export abstract class AchoBotDynamicCommand implements ITmiCommand {
     private permissions: string[];
@@ -37,7 +37,7 @@ export abstract class AchoBotDynamicCommand implements ITmiCommand {
 
         permissions.push('Viewer');
 
-        permissions.push(`usr:${username.toLowerCase()}`)
+        permissions.push(`usr:${username.toLowerCase()}`);
 
         return permissions;
     }

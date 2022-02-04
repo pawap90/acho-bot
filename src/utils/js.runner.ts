@@ -1,4 +1,4 @@
-import { VM, VMScript } from 'vm2'
+import { VM, VMScript } from 'vm2';
 
 export class JsRunnerError extends Error {
     innerError: Error;
@@ -24,11 +24,11 @@ export class JsRunner {
 
     run<TContext>(context: TContext): string {
         try {
-            const scriptResult = this.vm.run(this.script)
+            const scriptResult = this.vm.run(this.script);
             return scriptResult(context);
         }
         catch (err) {
-            throw new JsRunnerError(`Script couldn't be executed`, err);
+            throw new JsRunnerError('Script couldn\'t be executed', err);
         }
     }
 
@@ -37,7 +37,7 @@ export class JsRunner {
             this.script.compile();
         }
         catch (err) {
-            throw new JsRunnerError(`Script couldn't be compiled`, err);
+            throw new JsRunnerError('Script couldn\'t be compiled', err);
         }
     }
 

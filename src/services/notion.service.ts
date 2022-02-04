@@ -1,4 +1,4 @@
-import { FetchBuilder } from "../utils/fetch.builder";
+import { FetchBuilder } from '../utils/fetch.builder';
 
 type NotionConfig = {
     version: string,
@@ -22,7 +22,7 @@ export class NotionService {
         };
     }
 
-    async getDatabasePage<TRecord>(databaseId: string, pageSize: number = 100, cursor?: string): Promise<TRecord[]> {
+    async getDatabasePage<TRecord>(databaseId: string, pageSize = 100): Promise<TRecord[]> {
         const endpoint = this.endpoints.GET_DATABASE.replace('{0}', databaseId);
 
         const databaseRecords = await FetchBuilder
@@ -45,7 +45,7 @@ export class NotionService {
     private mapDatabaseRecords(databaseRecords: any): NotionDatabaseSimpleRecord[] {
         const records: NotionDatabaseSimpleRecord[] = databaseRecords.results.map((r: { properties: { [x: string]: any; }; }) => {
             const record: NotionDatabaseSimpleRecord = {};
-            let propertyNames = Object.keys(r.properties);
+            const propertyNames = Object.keys(r.properties);
 
             for (const propertyKey in propertyNames) {
                 const propertyName = propertyNames[propertyKey];

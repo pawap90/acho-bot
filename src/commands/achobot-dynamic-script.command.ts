@@ -1,7 +1,7 @@
-import { ChatUserstate } from "tmi.js";
-import { JsRunner } from "../utils/js.runner";
-import Vm2Manager from "../utils/vm2.manager";
-import { AchoBotDynamicCommand } from "./achobot-dynamic.command"
+import { ChatUserstate } from 'tmi.js';
+import { JsRunner } from '../utils/js.runner';
+import Vm2Manager from '../utils/vm2.manager';
+import { AchoBotDynamicCommand } from './achobot-dynamic.command';
 
 export default class AchoBotDynamicScriptCommand extends AchoBotDynamicCommand {
 

@@ -1,5 +1,5 @@
-import { Router } from "express";
-import * as passport from "passport";
+import { Router } from 'express';
+import * as passport from 'passport';
 
 export default class TwitchAuthController {
 
@@ -10,7 +10,7 @@ export default class TwitchAuthController {
 
         router.get('/token', passport.authenticate('twitch', { successRedirect: '/api/status', failureRedirect: '/api/twitch/auth/failed' }));
 
-        router.get('failed', (req, res, next) => {
+        router.get('failed', (req, res) => {
             res.json({ message: 'Authorization with Twitch failed' }).status(401);
         });
 

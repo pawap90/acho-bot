@@ -1,5 +1,5 @@
-import { FetchBuilder, FetchBuilderError } from "../utils/fetch.builder";
-import CacheService from "./cache.service";
+import { FetchBuilder, FetchBuilderError } from '../utils/fetch.builder';
+import CacheService from './cache.service';
 
 
 type TwitchConfig = {
@@ -24,7 +24,7 @@ export class TwitchService {
             clientId: process.env.TWITCH_BOT_CLIENTID!,
             clientSecret: process.env.TWITCH_BOT_CLIENTSECRET!,
             redirectUri: process.env.TWITCH_BOT_REDIRECTURI!
-        }
+        };
     }
 
     async getUserProfile(accessToken: string): Promise<TwitchUser> {
@@ -61,7 +61,7 @@ export class TwitchService {
         }
 
         // If there's no access token, throw error
-        throw new TwitchAuthorizationRequiredError("No token in cache");
+        throw new TwitchAuthorizationRequiredError('No token in cache');
     }
 
     async validateAccessToken(accessToken: string): Promise<TwitchTokenValidationResult> {
@@ -80,7 +80,7 @@ export class TwitchService {
         }
         catch (err) {
             if (err instanceof FetchBuilderError && (err as FetchBuilderError).status === 401)
-                return { isValid: false }
+                return { isValid: false };
 
             throw err;
         }
@@ -92,7 +92,7 @@ export class TwitchService {
         endpoint += `?client_id=${this.config.clientId}`;
         endpoint += `&client_secret=${this.config.clientSecret}`;
         endpoint += `&refresh_token=${refreshToken}`;
-        endpoint += `&grant_type=refresh_token`;
+        endpoint += '&grant_type=refresh_token';
 
         const result = await FetchBuilder.post<TwitchToken>(endpoint)
             .execute();

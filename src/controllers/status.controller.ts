@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { TwitchAuthorizationRequiredError, TwitchService } from "../services/twitch.service";
+import { Router } from 'express';
+import { TwitchAuthorizationRequiredError, TwitchService } from '../services/twitch.service';
 
 export default class StatusController {
 
@@ -11,7 +11,7 @@ export default class StatusController {
         router.get('/', async (req, res, next) => {
             try {
                 await twitchService.getValidAccessToken();
-                res.json({ message: 'Ready to chat!' })
+                res.json({ message: 'Ready to chat!' });
             }
             catch (err) {
                 if (err instanceof TwitchAuthorizationRequiredError)

@@ -27,4 +27,3 @@ app.listen(process.env.PORT, async function () {
 
     await new TmiService(commandManager).startClient();
 });
-

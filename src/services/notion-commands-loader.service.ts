@@ -1,8 +1,8 @@
-import AchoBotDynamicScriptCommand from "../commands/achobot-dynamic-script.command";
-import AchoBotDynamicTextCommand from "../commands/achobot-dynamic-text.command";
-import { AchoBotDynamicCommand } from "../commands/achobot-dynamic.command";
-import { TmiCommandDictionary } from "../commands/tmi-command.manager";
-import { NotionService } from "./notion.service";
+import AchoBotDynamicScriptCommand from '../commands/achobot-dynamic-script.command';
+import AchoBotDynamicTextCommand from '../commands/achobot-dynamic-text.command';
+import { AchoBotDynamicCommand } from '../commands/achobot-dynamic.command';
+import { TmiCommandDictionary } from '../commands/tmi-command.manager';
+import { NotionService } from './notion.service';
 
 type NotionCommand = {
     CommandName: string,
@@ -18,8 +18,8 @@ export class NotionCommandsLoader {
 
     static getPublicCommands(): NotionCommand[] {
         return this.loadedCommands.filter(c => {
-            return !c.Permissions || c.Permissions.length == 0 || c.Permissions.indexOf('Viewer') >= 0 || c.Permissions.indexOf('Subscriber') >= 0
-        })
+            return !c.Permissions || c.Permissions.length == 0 || c.Permissions.indexOf('Viewer') >= 0 || c.Permissions.indexOf('Subscriber') >= 0;
+        });
     }
 
     static async load(): Promise<TmiCommandDictionary> {
@@ -45,12 +45,12 @@ export class NotionCommandsLoader {
 
     private static createCommandInstance(type: string, response: string, permissions: string[]): AchoBotDynamicCommand {
         switch (type) {
-            case 'Text':
-                return new AchoBotDynamicTextCommand(response, permissions);
-            case 'Script':
-                return new AchoBotDynamicScriptCommand(response, permissions);
-            default:
-                throw new Error('Unrecognized command type');
+        case 'Text':
+            return new AchoBotDynamicTextCommand(response, permissions);
+        case 'Script':
+            return new AchoBotDynamicScriptCommand(response, permissions);
+        default:
+            throw new Error('Unrecognized command type');
         }
     }
 }

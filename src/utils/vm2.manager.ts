@@ -1,4 +1,4 @@
-import { VM } from "vm2";
+import { VM } from 'vm2';
 
 export default class Vm2Manager {
 

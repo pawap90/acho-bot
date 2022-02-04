@@ -1,21 +1,14 @@
-import { Client as TmiClient, ChatUserstate as TmiChatUserState } from 'tmi.js'
-import CacheService from '../services/cache.service';
+import { Client as TmiClient, ChatUserstate as TmiChatUserState } from 'tmi.js';
 
 export interface ITmiCommand {
-    //name: string, // !hello or !vscodeTheme 
     execute(channel: string, client: TmiClient, tags: TmiChatUserState): void;
 }
 
 export type TmiCommandDictionary = { [key: string]: ITmiCommand }
 
 export class TmiCommandManager {
-    private readonly commandCacheKey = 'chatbot-commands';
-
     private _commands: TmiCommandDictionary = {};
 
-    constructor() {
-        //this._commands = CacheService.get<TmiCommandDictionary>(this.commandCacheKey);
-    }
 
     get commands(): TmiCommandDictionary {
         return this._commands;
