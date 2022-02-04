@@ -13,10 +13,12 @@ style.
 
 if status == 200
     p.green AchoBot is ready to chat!
-else if status == 401
-    p.red AchoBot requires authorization
-else
-    p.red AchoBot authorization failed (Status: #{status})
+else 
+    if status == 401
+        p.red AchoBot requires authorization
+    else
+        p.red AchoBot authorization failed (Status: #{status})
+    a(href="api/twitch/auth") Login with your Twitch bot account.
 
 script. 
     setTimeout(function(){
