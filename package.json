@@ -5,9 +5,12 @@
   "main": "src/app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --config nodemon.json src/app.ts --no-stdin",
+    "dev": "nodemon --config nodemon.json src/app.ts --no-stdin",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "build:ts": "tsc",
+    "build": "npm run lint && npm run build:ts",
+    "start": "node _dist/app.js"
   },
   "author": "paulasantamaria",
   "license": "ISC",
