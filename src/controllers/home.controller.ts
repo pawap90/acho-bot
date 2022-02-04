@@ -25,7 +25,7 @@ export default class HomeController {
 
         router.get('/commands', async (req, res, next) => {           
 
-            res.render('commands.pug', { commands: NotionCommandsLoader.getPublicCommands() })
+            res.render('commands.pug', { mode: req.query.mode, commands: NotionCommandsLoader.getPublicCommands() })
         });
 
         return router;

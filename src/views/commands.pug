@@ -2,7 +2,7 @@ style.
     body {
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bold;
-        font-size: small;
+        font-size: 10px;
         background-color: #202533;
         color: #f5f5f5;
     }
@@ -24,7 +24,7 @@ style.
         color: #CA7CEE;
     }
     code {
-        font-size: medium;
+        font-size: 11px;
         color: #f5f5f5;
     }
     .permissions {
@@ -56,13 +56,14 @@ div#container
                         p.permissions #{command.Permissions}
                     td #{command.Description}
 
-h3 Download this image for your Twitch panels
+if mode == "image"
+    h3 Download this image for your Twitch panels
 
-script(src="https://html2canvas.hertzen.com/dist/html2canvas.min.js") 
-script. 
-    const container = document.getElementById("container");
-    html2canvas(container).then(function(canvas) {
-        document.body.appendChild(canvas);
-        canvas.classList.add("canvas");
-        container.style.display = "none";
-    });
+    script(src="https://html2canvas.hertzen.com/dist/html2canvas.min.js") 
+    script. 
+        const container = document.getElementById("container");
+        html2canvas(container).then(function(canvas) {
+            document.body.appendChild(canvas);
+            canvas.classList.add("canvas");
+            container.style.display = "none";
+        });
