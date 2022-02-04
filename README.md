@@ -4,6 +4,19 @@ Configure your chatbot commands in Notion and AchoBot will use them during your 
 
 ![notion-database](https://user-images.githubusercontent.com/2507959/152531729-8b117829-9965-41a6-9455-b10dbf4cda40.png)
 
+- [Features](#features)
+  - [Manage your Twitch Chatbot from Notion](#manage-your-twitch-chatbot-from-notion)
+  - [Assign Permissions to each Command](#assign-permissions-to-each-command)
+    - [Specific user permissions](#specific-user-permissions)
+  - [Command view](#command-view)
+  - [Scripted commands](#scripted-commands)
+  - [Single account](#single-account)
+  - [Status view](#status-view)
+- [Quick start](#quick-start)
+  - [Dependencies](#dependencies)
+  - [Development](#development)
+  - [Environment variables](#environment-variables)
+
 # Features
 
 ## Manage your Twitch Chatbot from Notion
