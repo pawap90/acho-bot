@@ -14,24 +14,29 @@ Configure your chatbot commands in Notion and AchoBot will use them during your 
 
 > Press "Duplicate" to copy the template in your Notion. The template comes with a few sample commands; feel free to delete them and add your own.
 
-2. Build the project
+2. Clone the repo 
+```
+git clone https://github.com/pawap90/acho-bot
+```
+
+3. Build the project
    
 ```
 npm run build
 ```
 > You can find the transpiled code in the `_dist` folder.
 
-3. Make sure to setup all the [Environment variables](#environment-variables)
+4. Make sure to setup all the [Environment variables](#environment-variables)
 
-4. Run it
+5. Run it
 ```
 npm start
 ```
-5. Open the site in your browser (E.g: http://localhost:5000 if you are running it locally) and press the link to login with your bot's Twitch account. This will give the application permissions to use the chat in your bot's behalf, so it can start answering to commands.
+6. Open the site in your browser (E.g: http://localhost:5000 if you are running it locally) and press the link to login with your bot's Twitch account. This will give the application permissions to use the chat in your bot's behalf, so it can start answering to commands.
 
-> Once you start streaming, if the service is running and you authorized the bot (step 5), the bot will login to the chat automatically. Give the bot's account moderator permissions so it can reply to commands without limitations. Type this in the chat: `/mod bot_username`
+> Once you start streaming, if the service is running and you authorized the bot (step 6), the bot will login to the chat automatically. Give the bot's account moderator permissions so it can reply to commands without limitations. Type this in the chat: `/mod bot_username`
 
-# Quick start: Development
+# Development
 
 1. Clone the repo 
 ```
