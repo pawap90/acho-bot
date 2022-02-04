@@ -126,3 +126,4 @@ NOTION_DATABASEID=<your-notion-database-id>
 NOTION_VERSION=2021-08-16
 ```
 When running the project locally using `npm run dev` you should set the environment variables within a `.env` file in the root. 
+
