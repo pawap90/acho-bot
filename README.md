@@ -27,6 +27,9 @@ npm run build
 ```
 npm start
 ```
+5. Open the site in your browser (E.g: http://localhost:5000 if you are running it locally) and press the link to login with your bot's Twitch account. This will give the application permissions to use the chat in your bot's behalf, so it can start answering to commands.
+
+> Once you start streaming, if the service is running and you authorized the bot (step 5), the bot will login to the chat automatically. Give the bot's account moderator permissions so it can reply to commands without limitations. Type this in the chat: `/mod bot_username`
 
 # Quick start: Development
 
