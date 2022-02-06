@@ -9,15 +9,17 @@ export class HelpCommand extends BaseTmiCommand {
     }
 
     protected executeLogic(channel: string, client: Client, tags: ChatUserstate): void {
-        client.say(channel, this.getCommandNameList());
+        const commandList = this.getCommandNameList();
+        if (commandList)
+            client.say(channel, commandList);
     }
 
-    private getCommandNameList(): string {
-        const commands = CommandCache.get();
-        let message = '';
+    private getCommandNameList(): string | undefined {
+        const commands = CommandCache.getPublic();
+        let message;
 
         if (commands)
-            message = Object.keys(commands).join(', ');
+            message = commands.map(c => c.name).join(', ');
 
         return message;
     }
