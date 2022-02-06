@@ -2,6 +2,7 @@ import { ChatUserstate, Client } from 'tmi.js';
 
 class TmiClientMock extends Client {
     lastMessage: string = 'no-message-sent';
+    moderators: string[] = []
 }
 
 export class TmiClientMockHelper {
@@ -11,22 +12,29 @@ export class TmiClientMockHelper {
 
             return Promise.resolve([message]);
         });
+
+        jest.spyOn(TmiClientMock.prototype, 'isMod').mockImplementation(function (this: TmiClientMock, channel, user) {
+            return this.moderators.includes(user);
+        });
     }
 
-    static createClient(): TmiClientMock {
-        return new TmiClientMock({
+    static createClient(channel?: string, mods?: string[]): TmiClientMock {
+        const client = new TmiClientMock({
             options: { debug: true, messagesLogLevel: 'info' },
             connection: {
                 reconnect: true,
                 secure: true
             },
-            channels: ['testChannel']
+            channels: [channel ?? 'testChannel']
         });
+        if (mods)
+            client.moderators = mods;
+        return client;
     }
 
-    static createChatUserstate(): ChatUserstate {
+    static createChatUserstate(username?: string): ChatUserstate {
         return {
-            username: 'testviewer'
+            username: username ?? 'testviewer'
         }
     }
 }

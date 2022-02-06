@@ -1,4 +1,4 @@
-import { ICommandLoader, Role, TmiCommandDictionary } from "../src/commands/itmi.command";
+import { ICommandLoader, Permissions, Role, TmiCommandDictionary } from "../src/commands/itmi.command";
 import AchoBotDynamicTextCommand from "../src/commands/achobot-dynamic-text.command";
 
 export class BroadcasterOnlyCommandsLoader implements ICommandLoader {
@@ -56,3 +56,27 @@ export class MixedPermissionsCommandsLoader implements ICommandLoader {
         }
     }
 }
+
+export class NoPermissionsCommandsLoader implements ICommandLoader {
+    async load(): Promise<TmiCommandDictionary> {
+
+        return {
+            '!everyone': new AchoBotDynamicTextCommand('!everyone', 'Command available for everyone', 'everyone can invoke me', [])
+        }
+    }
+}
+
+export class DynamicPermissionsCommandsLoader implements ICommandLoader {
+    permissions: Permissions[];
+    constructor(permissions: Permissions[]) {
+        this.permissions = permissions;
+    }
+
+    async load(): Promise<TmiCommandDictionary> {
+
+        return {
+            '!dynamic': new AchoBotDynamicTextCommand('!dynamic', 'Dynamic permissions command', 'dynamic roles can invoke me', this.permissions)
+        }
+    }
+}
+
