@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { NotionCommandsLoader } from '../services/notion-commands-loader.service';
+import { CommandCache } from '../cache/command.cache';
+import { NotionCommandsLoader } from '../commands/loaders/notion-commands.loader';
 import { TwitchAuthorizationRequiredError, TwitchService } from '../services/twitch.service';
 
 export default class HomeController {
@@ -26,7 +27,7 @@ export default class HomeController {
         router.get('/commands', async (req, res) => {           
             res.render('commands.pug', { 
                 mode: req.query.mode, 
-                commands: NotionCommandsLoader.getPublicCommands() 
+                commands: CommandCache.getPublic() 
             });
         });
 

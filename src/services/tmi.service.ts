@@ -10,16 +10,17 @@ export default class TmiService {
     }
 
     async startClient(): Promise<void> {
+        await this.commandManager.loadCommands();
         const client = this.createClient();
 
         try {
             await client.connect();
             console.info('TMI client connected');
 
-            client.on('message', (channel, tags, message, self) => {
+            client.on('message', async (channel, tags, message, self) => {
                 if (self) return;
 
-                const command = this.commandManager.getCommand(message.toLowerCase().trim());
+                const command = await this.commandManager.getCommand(message.toLowerCase().trim());
                 if (command) {
                     command.execute(channel, client, tags);
                 }

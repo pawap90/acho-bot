@@ -5,9 +5,10 @@ import StatusController from './controllers/status.controller';
 import TwitchAuthController from './controllers/twitch-auth.controller';
 import HomeController from './controllers/home.controller';
 
-import { NotionCommandsLoader } from './services/notion-commands-loader.service';
+import { NotionCommandsLoader } from './commands/loaders/notion-commands.loader';
 import Server from './server';
 import TmiService from './services/tmi.service';
+import { BuiltInCommandsLoader } from './commands/loaders/builtin-commands.loader';
 
 dotenv.config();
 
@@ -20,10 +21,9 @@ const app = Server.init({
 app.listen(process.env.PORT, async function () {
     console.info('App running. Port: ' + process.env.PORT);
 
-    const commandManager = new TmiCommandManager();
-    const notionCommands = await NotionCommandsLoader.load();
-
-    if (Object.keys(commandManager.commands).length == 0) commandManager.register(undefined, notionCommands);
+    const commandManager = new TmiCommandManager({
+        loaders: [ new NotionCommandsLoader(), new BuiltInCommandsLoader() ]
+    });
 
     await new TmiService(commandManager).startClient();
 });

@@ -52,9 +52,9 @@ div#container
             each command in commands
                 tr 
                     td 
-                        code #{command.CommandName}
-                        p.permissions #{command.Permissions}
-                    td #{command.Description}
+                        code #{command.name}
+                        p.permissions #{command.permissions}
+                    td #{command.description}
 
 if mode == "image"
     h3 Download this image for your Twitch panels

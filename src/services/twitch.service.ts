@@ -1,5 +1,6 @@
+import TwitchCache from '../cache/twitch.cache';
 import { FetchBuilder, FetchBuilderError } from '../utils/fetch.builder';
-import CacheService from './cache.service';
+
 
 
 type TwitchConfig = {
@@ -43,8 +44,8 @@ export class TwitchService {
 
     async getValidAccessToken(): Promise<string> {
         // Try to get the access token from cache
-        const accessToken = CacheService.getAccessToken();
-        const refreshToken = CacheService.getRefreshToken();
+        const accessToken = TwitchCache.getAccessToken();
+        const refreshToken = TwitchCache.getRefreshToken();
 
         if (refreshToken && refreshToken.length > 0 && accessToken && accessToken.length > 0) {
             // If there's a token, check if it's valid.
@@ -56,8 +57,8 @@ export class TwitchService {
             // If it's not valid, refresh
             const tokens = await this.generateNewTokens(refreshToken);
 
-            CacheService.storeAccessToken(tokens.access_token);
-            CacheService.storeRefreshToken(tokens.refresh_token);
+            TwitchCache.storeAccessToken(tokens.access_token);
+            TwitchCache.storeRefreshToken(tokens.refresh_token);
         }
 
         // If there's no access token, throw error

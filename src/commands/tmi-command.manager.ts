@@ -1,35 +1,37 @@
-import { Client as TmiClient, ChatUserstate as TmiChatUserState } from 'tmi.js';
-
-export interface ITmiCommand {
-    execute(channel: string, client: TmiClient, tags: TmiChatUserState): void;
-}
-
-export type TmiCommandDictionary = { [key: string]: ITmiCommand }
+import { CommandCache } from '../cache/command.cache';
+import { ICommandLoader, ITmiCommand, TmiCommandDictionary } from './itmi.command';
 
 export class TmiCommandManager {
-    private _commands: TmiCommandDictionary = {};
 
+    loaders: ICommandLoader[];
 
-    get commands(): TmiCommandDictionary {
-        return this._commands;
+    constructor(config: { loaders: ICommandLoader[] }) {
+        this.loaders = config.loaders;
     }
 
-    private set commands(commands: TmiCommandDictionary) {
-        this._commands = commands;
+    async getCommands(): Promise<TmiCommandDictionary> {
+        let cachedCommands = CommandCache.get();
+        console.log(cachedCommands)
+        if (!cachedCommands) 
+            return await this.loadCommands();
+        
+        return cachedCommands;
     }
 
-    register(commanDetail?: { key: string, command: ITmiCommand }, commands?: TmiCommandDictionary): void {
-        if (!this._commands) this._commands = {};
+    async loadCommands(): Promise<TmiCommandDictionary> {
+        let commandDictionary: TmiCommandDictionary = {};
+        for (const key in this.loaders) {
+            const loader = this.loaders[key];
+            const loaderCommands = await loader.load();
+            commandDictionary = { ...commandDictionary, ...loaderCommands };
+        }
 
-        if (commands)
-            this.commands = commands;
-        else if (commanDetail)
-            this._commands[commanDetail.key] = commanDetail.command;
+        CommandCache.store(commandDictionary);
 
-        //CacheService.store<TmiCommandDictionary>(this.commandCacheKey, this._commands);
+        return commandDictionary;
     }
 
-    getCommand(name: string): ITmiCommand {
-        return this._commands[name];
+    async getCommand(name: string): Promise<ITmiCommand> {
+        return (await this.getCommands())[name];
     }
 }

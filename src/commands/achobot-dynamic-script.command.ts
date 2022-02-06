@@ -7,8 +7,8 @@ export default class AchoBotDynamicScriptCommand extends AchoBotDynamicCommand {
 
     private jsRunner: JsRunner;
 
-    constructor(response: string, permissions?: string[]) {
-        super(permissions);
+    constructor(name: string, description: string, response: string, permissions?: string[]) {
+        super(name, description, permissions);
 
         this.jsRunner = new JsRunner(Vm2Manager.getInstance().vm, response);
         this.jsRunner.compile();

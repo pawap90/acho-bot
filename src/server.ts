@@ -3,7 +3,7 @@ import * as session from 'express-session';
 import * as passport from 'passport';
 import * as OAuth2Strategy from 'passport-oauth2';
 
-import CacheService from './services/cache.service';
+import TwitchCache from './cache/twitch.cache';
 import { TwitchService } from './services/twitch.service';
 import { HttpError } from './utils/http.error';
 
@@ -56,8 +56,8 @@ export default class Server {
                 done(new Error('Unauthorized account'));
             }
             else {   
-                CacheService.storeRefreshToken(refreshToken);
-                CacheService.storeAccessToken(accessToken);
+                TwitchCache.storeRefreshToken(refreshToken);
+                TwitchCache.storeAccessToken(accessToken);
     
                 done(null, profile);
             }
