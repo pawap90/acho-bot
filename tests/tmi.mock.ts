@@ -1,7 +1,7 @@
 import { ChatUserstate, Client } from 'tmi.js';
 
 class TmiClientMock extends Client {
-    lastMessage: string = 'no-message-sent';
+    lastMessage = 'no-message-sent';
     moderators: string[] = []
 }
 
@@ -35,7 +35,6 @@ export class TmiClientMockHelper {
     static createChatUserstate(username?: string): ChatUserstate {
         return {
             username: username ?? 'testviewer'
-        }
+        };
     }
 }
-

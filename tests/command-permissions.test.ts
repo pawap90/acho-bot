@@ -1,19 +1,27 @@
-import { TmiCommandManager } from '../src/commands/tmi-command.manager'
+import { TmiCommandManager } from '../src/commands/tmi-command.manager';
 
 import { TmiClientMockHelper } from './tmi.mock';
-import { BroadcasterOnlyCommandsLoader, DynamicPermissionsCommandsLoader, MixedPermissionsCommandsLoader, ModeratorOnlyCommandsLoader, NoPermissionsCommandsLoader, SpecificUserOnlyCommandsLoader, SubscriberOnlyCommandsLoader, ViewerOnlyCommandsLoader } from './command-loader.mock';
+import {
+    BroadcasterOnlyCommandsLoader,
+    DynamicPermissionsCommandsLoader,
+    ModeratorOnlyCommandsLoader,
+    NoPermissionsCommandsLoader,
+    SpecificUserOnlyCommandsLoader,
+    SubscriberOnlyCommandsLoader,
+    ViewerOnlyCommandsLoader
+} from './command-loader.mock';
 import { AppCache } from '../src/cache/cache.service';
 import { ICommandLoader, Role } from '../src/commands/itmi.command';
 
 const testBroadcaster = '@testbroadcaster';
 
 beforeAll(() => {
-    TmiClientMockHelper.mockClient()
-})
+    TmiClientMockHelper.mockClient();
+});
 
 afterEach(() => {
     AppCache.flushAll();
-})
+});
 
 afterAll(() => {
     jest.restoreAllMocks();
@@ -298,4 +306,4 @@ describe('command permissions ', () => {
         expect(client.lastMessage).toBe('Not enough permissions');
     });
 
-})
+});

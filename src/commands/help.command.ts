@@ -1,4 +1,4 @@
-import { Client, ChatUserstate } from 'tmi.js';
+import { Client } from 'tmi.js';
 import { CommandCache } from '../cache/command.cache';
 import { BaseTmiCommand } from './base-tmi.command';
 
@@ -8,7 +8,7 @@ export class HelpCommand extends BaseTmiCommand {
         super('!help', 'Get a list of available commands', []);
     }
 
-    protected executeLogic(channel: string, client: Client, tags: ChatUserstate): void {
+    protected executeLogic(channel: string, client: Client): void {
         const commandList = this.getCommandNameList();
         if (commandList)
             client.say(channel, commandList);

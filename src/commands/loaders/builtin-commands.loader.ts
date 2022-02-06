@@ -7,6 +7,6 @@ export class BuiltInCommandsLoader implements ICommandLoader {
 
         return {
             '!help': new HelpCommand()
-        }
+        };
     }
 }

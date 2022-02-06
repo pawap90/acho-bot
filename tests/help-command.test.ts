@@ -1,20 +1,20 @@
-import { TmiCommandManager } from '../src/commands/tmi-command.manager'
-import { BuiltInCommandsLoader } from '../src/commands/loaders/builtin-commands.loader'
+import { TmiCommandManager } from '../src/commands/tmi-command.manager';
+import { BuiltInCommandsLoader } from '../src/commands/loaders/builtin-commands.loader';
 
 import { TmiClientMockHelper } from './tmi.mock';
 import { CommandCache } from '../src/cache/command.cache';
 import { BroadcasterOnlyCommandsLoader, MixedPermissionsCommandsLoader, ModeratorOnlyCommandsLoader, SpecificUserOnlyCommandsLoader, SubscriberOnlyCommandsLoader } from './command-loader.mock';
 import { AppCache } from '../src/cache/cache.service';
 
-const testChannelName = 'testChannel'
+const testChannelName = 'testChannel';
 
 beforeAll(() => {
-    TmiClientMockHelper.mockClient()
-})
+    TmiClientMockHelper.mockClient();
+});
 
 afterEach(() => {
     AppCache.flushAll();
-})
+});
 
 afterAll(() => {
     jest.restoreAllMocks();
@@ -23,7 +23,7 @@ afterAll(() => {
 async function loadBuiltinCommands(): Promise<TmiCommandManager> {
     const commandManager = new TmiCommandManager({
         loaders: [new BuiltInCommandsLoader()]
-    })
+    });
     await commandManager.loadCommands();
     return commandManager;
 }
@@ -92,4 +92,4 @@ describe('built-in help command ', () => {
         expect(client.lastMessage).toBe('!broadcasterSubscriber, !help, !moderatorViewer, !userSubscriber');
     });
 
-})
+});
