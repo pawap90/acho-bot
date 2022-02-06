@@ -79,7 +79,7 @@ Built-in commands are defined in the codebase, instead of notion. They usually r
 - `!refresh` invalidates the command cache so next time a command is triggered, the app needs to go to Notion to retriee the commands, thus updating them to the latest version. Only available for Broadcaster and Moderators. 
 
 ## Placeholder commands
-There are also commands that are triggered via code, but defined in Notion. This allows AchoBot to react to certain events (like a user logging in or subscribing) but users can specify what they want AchoBot to do in each case.
+There are also commands that are triggered via code, but defined in Notion. This allows AchoBot to react to certain events (like a user logging in or subscribing) while also allowing each user to specify what they want AchoBot to do in each case.
 Right now the only placeholder command is:
 - `!welcome`: Executed when AchoBot joins the chat room inmediately after a stream starts. If you define this command in Notion, when the bot logs in it can say hi and leave some important information in the chat. E.g: "Hi, I'm AchoBot! Type !help to see what I can do". 
 
