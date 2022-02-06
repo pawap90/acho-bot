@@ -70,6 +70,16 @@ The service is not currently designed to handle multiple accounts. This is a lim
 Use the status view to see if your bot's Twitch account is correctly authorized. 
 You can use this view in OBS to get real time feedback of your chatbot status (it auto-updates every minute).
 
+## Built-in commands
+Built-in commands are defined in the codebase, instead of notion. They usually require more logic and access to resources unavailable to the Notion commands. There are currently two built-in commands that you can use:
+- `!help` prints a list of available commands.
+- `!refresh` invalidates the command cache so next time a command is triggered, the app needs to go to Notion to retriee the commands, thus updating them to the latest version. Only available for Broadcaster and Moderators. 
+
+## Placeholder commands
+There are also commands that are triggered via code, but defined in Notion. This allows AchoBot to react to certain events (like a user logging in or subscribing) but users can specify what they want AchoBot to do in each case.
+Right now the only placeholder command is:
+- `!welcome`: Executed when AchoBot joins the chat room inmediately after a stream starts. If you define this command in Notion, when the bot logs in it can say hi and leave some important information in the chat. E.g: "Hi, I'm AchoBot! Type !help to see what I can do". 
+
 # Quick start
 
 ## Dependencies
@@ -121,6 +131,13 @@ npm install
 
 ```sh
 npm run dev
+```
+
+## Test
+To run the available tests use:
+
+```
+npm test
 ```
 
 ## Environment variables
