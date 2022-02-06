@@ -1,9 +1,14 @@
 # Build changes before merging the PR
-name: PR-CI
+name: CI
 
 on:
   pull_request:
     branches: [ main ]
+  
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
 
 jobs:
 
