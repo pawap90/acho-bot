@@ -13,9 +13,12 @@ Configure your chatbot commands in Notion and AchoBot will use them during your 
   - [Scripted commands](#scripted-commands)
   - [Single account](#single-account)
   - [Status view](#status-view)
+  - [Built-in commands](#built-in-commands)
+  - [Placeholder commands](#placeholder-commands)
 - [Quick start](#quick-start)
   - [Dependencies](#dependencies)
   - [Development](#development)
+  - [Test](#test)
   - [Environment variables](#environment-variables)
 
 # Features
