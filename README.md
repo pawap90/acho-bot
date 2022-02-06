@@ -1,3 +1,4 @@
+[![build](https://github.com/pawap90/acho-bot/actions/workflows/build.yml/badge.svg)](https://github.com/pawap90/acho-bot/actions/workflows/build.yml)
 ![achobot-gh-banner](https://user-images.githubusercontent.com/2507959/152519862-b1d7116e-dade-4ed8-9ac5-f9eefeeff520.png)
 
 Configure your chatbot commands in Notion and AchoBot will use them during your streams:
