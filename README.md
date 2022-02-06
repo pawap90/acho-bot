@@ -42,7 +42,8 @@ You can specify the Type of command in the "Type" column. Available options are:
 - Text
 - Script
 
-Text commands return a plain text response. E.g: "Welcome to the stream"
+Text commands return a plain text response. E.g: "Welcome to the stream".
+
 Scripted commands can implement some logic (JavaScript)  and receive parameters.
 
 For example, imagine the following command `!say <text>`: 
