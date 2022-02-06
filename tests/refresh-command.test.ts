@@ -1,11 +1,9 @@
 import { TmiCommandManager } from '../src/commands/tmi-command.manager';
 import { BuiltInCommandsLoader } from '../src/commands/loaders/builtin-commands.loader';
-
 import { TmiClientMockHelper } from './tmi.mock';
 import { CommandCache } from '../src/cache/command.cache';
-import { BroadcasterOnlyCommandsLoader, MixedPermissionsCommandsLoader, ModeratorOnlyCommandsLoader, SpecificUserOnlyCommandsLoader, SubscriberOnlyCommandsLoader } from './command-loader.mock';
 import { AppCache } from '../src/cache/cache.service';
-import { cp } from 'fs';
+
 
 const testChannelName = '@testChannel';
 
@@ -47,12 +45,12 @@ describe('built-in refresh command ', () => {
         const command = await commandManager.getCommand('!refresh');
 
         command.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate(testChannelName.substring(1)));
-        
+
         expect(CommandCache.get()).toBe(null);
-        
+
         const newCommand = await commandManager.getCommand('!help');
         newCommand.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate(testChannelName.substring(1)));
-        
+
         expect(CommandCache.get()).not.toBe(null);
         expect(client.lastMessage).toBe('!help');
 
