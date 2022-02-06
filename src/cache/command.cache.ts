@@ -7,7 +7,7 @@ import { AppCache } from './cache.service';
 export class CommandCache {
     private static readonly COMMANDS_KEY = 'commands';
 
-    static store(commands: TmiCommandDictionary) {
+    static store(commands: TmiCommandDictionary): void {
         AppCache.set(this.COMMANDS_KEY, commands, 60 * 60 * 24);
     }
 
@@ -28,7 +28,7 @@ export class CommandCache {
         return publicCommands;
     }
 
-    static clear() {
+    static clear(): void {
         AppCache.set(this.COMMANDS_KEY, undefined, 60 * 60 * 24);
     }
 }

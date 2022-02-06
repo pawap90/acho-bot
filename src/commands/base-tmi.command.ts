@@ -30,7 +30,7 @@ export abstract class BaseTmiCommand implements ITmiCommand {
 
         if (!username) return userPermissions;
 
-        if (username.toLowerCase() == channel.substring(1))
+        if (username.toLowerCase() == channel.toLowerCase().substring(1))
             userPermissions.push(Role.Broadcaster);
 
         if (client.isMod(channel, username))
