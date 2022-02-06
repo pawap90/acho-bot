@@ -6,8 +6,6 @@ import { CommandCache } from '../src/cache/command.cache';
 import { BroadcasterOnlyCommandsLoader, MixedPermissionsCommandsLoader, ModeratorOnlyCommandsLoader, SpecificUserOnlyCommandsLoader, SubscriberOnlyCommandsLoader } from './command-loader.mock';
 import { AppCache } from '../src/cache/cache.service';
 
-
-
 const testChannelName = 'testChannel'
 
 beforeAll(() => {
@@ -65,7 +63,9 @@ describe('built-in help command ', () => {
                 new SubscriberOnlyCommandsLoader(), 
                 new BuiltInCommandsLoader()
             ]
-        })
+        });
+        commandManager.loadCommands();
+
         const client = TmiClientMockHelper.createClient();
         const command = await commandManager.getCommand('!help');
 
@@ -81,7 +81,9 @@ describe('built-in help command ', () => {
                 new ModeratorOnlyCommandsLoader(), 
                 new BuiltInCommandsLoader()
             ]
-        })
+        });
+        commandManager.loadCommands();
+
         const client = TmiClientMockHelper.createClient();
         const command = await commandManager.getCommand('!help');
 
