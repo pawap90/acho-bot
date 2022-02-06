@@ -25,6 +25,15 @@ export default class TmiService {
                     command.execute(channel, client, tags);
                 }
             });
+
+            client.on('join', async (channel, username) => {
+
+                const refreshCommand = await this.commandManager.getCommand('!refresh');
+                refreshCommand?.execute(channel, client, { username });
+
+                const welcomeCommand = await this.commandManager.getCommand('!welcome');
+                welcomeCommand?.execute(channel, client, { username });
+            });
         }
         catch (err) {
             console.error('TMI client startup failed');
