@@ -1,5 +1,5 @@
 # Build changes before merging the PR
-name: CI
+name: build
 
 on:
   pull_request:
