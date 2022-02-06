@@ -11,7 +11,7 @@ export class TmiCommandManager {
 
     async getCommands(): Promise<TmiCommandDictionary> {
         let cachedCommands = CommandCache.get();
-        console.log(cachedCommands)
+        
         if (!cachedCommands) 
             return await this.loadCommands();
         
