@@ -27,4 +27,8 @@ export class CommandCache {
 
         return publicCommands;
     }
+
+    static clear() {
+        AppCache.set(this.COMMANDS_KEY, undefined, 60 * 60 * 24);
+    }
 }
