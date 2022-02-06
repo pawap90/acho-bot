@@ -37,7 +37,7 @@ describe('built-in help command ', () => {
 
         command.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
 
-        expect(client.lastMessage).toBe('!help');
+        expect(client.lastMessage).not.toBe('!help');
     });
 
     it('doesnt produce a message if no commands are available', async () => {
