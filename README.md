@@ -1,7 +1,7 @@
 [![build](https://github.com/pawap90/acho-bot/actions/workflows/build.yml/badge.svg)](https://github.com/pawap90/acho-bot/actions/workflows/build.yml)
 ![achobot-gh-banner](https://user-images.githubusercontent.com/2507959/152519862-b1d7116e-dade-4ed8-9ac5-f9eefeeff520.png)
 
-Configure your chatbot commands in Notion and AchoBot will use them during your streams:
+Use Notion to configure your Twitch chatbot commands! 
 
 ![notion-database](https://user-images.githubusercontent.com/2507959/152531729-8b117829-9965-41a6-9455-b10dbf4cda40.png)
 
@@ -27,7 +27,7 @@ Configure your chatbot commands in Notion and AchoBot will use them during your 
 Add, update or delete commands in a Notion database. AchoBot will use the information from Notion to answer your viewers when they invoke a command.
 
 ## Assign Permissions to each Command
-The database includes a `Permissions` column where you can specify who can invoke each command. Leave it empty and everyone will have access to it. 
+The database includes a `Permissions` column where you can specify who can invoke each command. Leave it empty, and everyone will have access to it. 
 The column accepts one or more of the following values: 
 - Broadcaster
 - Moderator
@@ -42,7 +42,7 @@ Navigate to /commands to get a list of every public command. Your viewers can us
 Also, you can navigate to /commands?mode=image to get a ready-to-download image you can add to your Twitch panels.
 
 ## Scripted commands
-You can specify the Type of command in the "Type" column. Available options are:
+You can specify the type of command in the "Type" column. Available options are:
 - Text
 - Script
 
@@ -65,23 +65,23 @@ Output: `You said: hello`
 
 ## Single account
 The chatbot service will work only for the accounts and channels specified in the environment variables. 
-If any other account tries to login using the chatbot authorization endpoints, it will get an authorization error. 
+If any other account tries to log in using the chatbot authorization endpoints, it will get an authorization error. 
 
-The service is not currently designed to handle multiple accounts. This is a limitation but it also makes the hosting and configuration of the service easier.
+The service is not currently designed to handle multiple accounts. This is a limitation, but it also makes the hosting and configuration of the service easier.
 
 ## Status view
 Use the status view to see if your bot's Twitch account is correctly authorized. 
-You can use this view in OBS to get real time feedback of your chatbot status (it auto-updates every minute).
+You can use this view in OBS to get real-time feedback on your chatbot status (it auto-updates every minute).
 
 ## Built-in commands
-Built-in commands are defined in the codebase, instead of notion. They usually require more logic and access to resources unavailable to the Notion commands. There are currently two built-in commands that you can use:
+Built-in commands are defined in the codebase instead of Notion. They usually require more logic and access to resources unavailable to the Notion commands. There are currently two built-in commands that you can use:
 - `!help` prints a list of available commands.
-- `!refresh` invalidates the command cache so next time a command is triggered, the app needs to go to Notion to retriee the commands, thus updating them to the latest version. Only available for Broadcaster and Moderators. 
+- `!refresh` invalidates the command cache, so next time a command is triggered, the app needs to go to Notion to retrieve the commands, thus updating them to the latest version. Only available for Broadcaster and Moderators. 
 
 ## Placeholder commands
-There are also commands that are triggered via code, but defined in Notion. This allows AchoBot to react to certain events (like a user logging in or subscribing) while also allowing each user to specify what they want AchoBot to do in each case.
-Right now the only placeholder command is:
-- `!welcome`: Executed when AchoBot joins the chat room inmediately after a stream starts. If you define this command in Notion, when the bot logs in it can say hi and leave some important information in the chat. E.g: "Hi, I'm AchoBot! Type !help to see what I can do". 
+Some commands are triggered via code but defined in Notion. This allows AchoBot to react to certain events (like a user logging in or subscribing) while also allowing each user to specify what they want AchoBot to do in each case.
+Right now, the only placeholder command is:
+- `!welcome`: Executed when AchoBot joins the chat room immediately after a stream starts. If you define this command in Notion when the bot logs in, it can say hi and leave some relevant information in the chat. E.g., "Hi, I'm AchoBot! Type !help to see what I can do". 
 
 # Quick start
 
@@ -105,15 +105,15 @@ npm run build
 ```
 > You can find the transpiled code in the `_dist` folder.
 
-4. Make sure to setup all the [Environment variables](#environment-variables)
+4. Make sure to set up all the [Environment variables](#environment-variables)
 
 5. Run it
 ```
 npm start
 ```
-6. Open the site in your browser (E.g: http://localhost:5000 if you are running it locally) and press the link to login with your bot's Twitch account. This will give the application permissions to use the chat in your bot's behalf, so it can start answering to commands.
+6. Open the site in your browser (e.g., http://localhost:5000 if you are running it locally) and press the link to log in with your bot's Twitch account. This will give the application permissions to use the chat on your bot's behalf, so it can start answering commands.
 
-> Once you start streaming, if the service is running and you authorized the bot (step 6), the bot will login to the chat automatically. Give the bot's account moderator permissions so it can reply to commands without limitations. Type this in the chat: `/mod bot_username`
+> Once you start streaming, if the service is running and you authorized the bot (step 6), the bot will automatically log in to the chat. Give the bot's account moderator permissions so it can reply to commands without limitations. Type this in the chat: `/mod bot_username`
 
 ## Development
 
@@ -128,7 +128,7 @@ git clone https://github.com/pawap90/acho-bot
 npm install
 ```
 
-3. Setup a `.env` file in the root as explaned in the [Environment variables](#environment-variables) section.
+3. Setup a `.env` file in the root as explained in the [Environment variables](#environment-variables) section.
 
 4. Start the local development server: 
 
@@ -137,14 +137,14 @@ npm run dev
 ```
 
 ## Test
-To run the available tests use:
+To run the available tests, use:
 
 ```
 npm test
 ```
 
 ## Environment variables
-These are the environment variables required to run the project. Make sure set the values with your own data.
+These are the environment variables required to run the project. Make sure to set the values with your own data.
 
 ```
 TWITCH_BOT_CLIENTID=<your-twitch-clientid>
@@ -160,5 +160,5 @@ NOTION_APIKEY=<your-notion-api-key>
 NOTION_DATABASEID=<your-notion-database-id>
 NOTION_VERSION=2021-08-16
 ```
-When running the project locally using `npm run dev` you should set the environment variables within a `.env` file in the root. 
+When running the project locally using `npm run dev`, you should set the environment variables within a `.env` file in the root. 
 
