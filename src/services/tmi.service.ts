@@ -1,4 +1,3 @@
-import { env } from 'process';
 import { Client as TmiClient } from 'tmi.js';
 import { TmiCommandManager } from '../commands/tmi-command.manager';
 import { TwitchService } from './twitch.service';
