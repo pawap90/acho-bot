@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { CommandCache } from '../cache/command.cache';
-import { NotionCommandsLoader } from '../commands/loaders/notion-commands.loader';
 import { TwitchAuthorizationRequiredError, TwitchService } from '../services/twitch.service';
 
 export default class HomeController {

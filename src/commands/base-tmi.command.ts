@@ -3,11 +3,11 @@ import { ITmiCommand, Role, Permissions } from './itmi.command';
 
 
 export abstract class BaseTmiCommand implements ITmiCommand {
-    permissions: string[];
+    permissions: Permissions[];
     name: string;
     description: string;
 
-    constructor(name: string, description: string, permissions?: string[]) {
+    constructor(name: string, description: string, permissions?: Permissions[]) {
         this.name = name;
         this.description = description;
         this.permissions = permissions ?? [];
@@ -16,7 +16,7 @@ export abstract class BaseTmiCommand implements ITmiCommand {
     protected abstract executeLogic(channel: string, client: Client, tags: ChatUserstate): void;
 
     execute(channel: string, client: Client, tags: ChatUserstate): void {
-        const userPermissions = this.getUserPermissions(client, channel, tags.username);
+        const userPermissions = this.getUserPermissions(client, channel, tags.username, tags.subscriber);
 
         if (this.permissions.length == 0 || userPermissions.some(permission => this.permissions.indexOf(permission) >= 0)) {
             this.executeLogic(channel, client, tags);

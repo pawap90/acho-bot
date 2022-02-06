@@ -45,12 +45,12 @@ export class NotionCommandsLoader implements ICommandLoader {
 
     private createCommandInstance(command: NotionCommand, permissions: string[]): AchoBotDynamicCommand {
         switch (command.Type) {
-            case 'Text':
-                return new AchoBotDynamicTextCommand(command.CommandName, command.Description, command.Response, permissions);
-            case 'Script':
-                return new AchoBotDynamicScriptCommand(command.CommandName, command.Description, command.Response, permissions);
-            default:
-                throw new Error('Unrecognized command type');
+        case 'Text':
+            return new AchoBotDynamicTextCommand(command.CommandName, command.Description, command.Response, permissions);
+        case 'Script':
+            return new AchoBotDynamicScriptCommand(command.CommandName, command.Description, command.Response, permissions);
+        default:
+            throw new Error('Unrecognized command type');
         }
     }
 }
