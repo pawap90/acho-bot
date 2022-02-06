@@ -1,3 +1,4 @@
+import { env } from 'process';
 import { Client as TmiClient } from 'tmi.js';
 import { TmiCommandManager } from '../commands/tmi-command.manager';
 import { TwitchService } from './twitch.service';
@@ -27,12 +28,13 @@ export default class TmiService {
             });
 
             client.on('join', async (channel, username) => {
+                if (username === process.env.TWITCH_BOT_USERNAME!) {
+                    const refreshCommand = await this.commandManager.getCommand('!refresh');
+                    refreshCommand?.execute(channel, client, { username });
 
-                const refreshCommand = await this.commandManager.getCommand('!refresh');
-                refreshCommand?.execute(channel, client, { username });
-
-                const welcomeCommand = await this.commandManager.getCommand('!welcome');
-                welcomeCommand?.execute(channel, client, { username });
+                    const welcomeCommand = await this.commandManager.getCommand('!welcome');
+                    welcomeCommand?.execute(channel, client, { username });
+                }
             });
         }
         catch (err) {
