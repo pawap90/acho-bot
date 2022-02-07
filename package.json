@@ -13,14 +13,14 @@
     "start": "node _dist/app.js"
   },
   "author": {
-		"name": "Paula Santamaria",
-		"email": "paula@uppernauts.com",
-		"url": "https://paulasantamaria.com"
-	},
+    "name": "Paula Santamaria",
+    "email": "paula@uppernauts.com",
+    "url": "https://paulasantamaria.com"
+  },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/pawap90/acho-bot.git"
-  }
+    "type": "git",
+    "url": "https://github.com/pawap90/acho-bot.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.13",
