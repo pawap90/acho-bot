@@ -1,7 +1,7 @@
 {
   "name": "acho-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Twitch chatbot powered by Notion",
   "main": "src/app.ts",
   "scripts": {
     "test": "jest ./tests --runInBand",
@@ -12,7 +12,15 @@
     "build": "npm run lint && npm run build:ts",
     "start": "node _dist/app.js"
   },
-  "author": "paulasantamaria",
+  "author": {
+		"name": "Paula Santamaria",
+		"email": "paula@uppernauts.com",
+		"url": "https://paulasantamaria.com"
+	},
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/pawap90/acho-bot.git"
+  }
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.13",
