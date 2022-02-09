@@ -14,9 +14,6 @@ export default class TmiService {
         const client = this.createClient();
 
         try {
-            await client.connect();
-            console.info('TMI client connected');
-
             client.on('message', async (channel, tags, message, self) => {
                 if (self) return;
 
@@ -35,6 +32,9 @@ export default class TmiService {
                     welcomeCommand?.execute(channel, client, { username });
                 }
             });
+
+            await client.connect();
+            console.info('TMI client connected');
         }
         catch (err) {
             console.error('TMI client startup failed');
