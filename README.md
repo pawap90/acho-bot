@@ -88,6 +88,12 @@ Right now, the only placeholder command is:
 ## Dependencies
 - [Node.js](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
+- Notion API Key
+- Notion Database
+- Twitch Account
+- Twitch Application
+
+> To get a detailed step-by-step guide on how to setup the project including every dependency, check out [AchoBot setup - Full guide](https://github.com/pawap90/acho-bot/wiki/AchoBot-setup---Full-guide)
 
 1. Setup your Notion Database. Generate it using the following Notion template: [[Template] AchoBot](https://familiar-freckle-76f.notion.site/350b171ebc30462fbdcb8391cb2f088a?v=0cf2e1a5f5bc476e827d2705e2bdc223)
 
