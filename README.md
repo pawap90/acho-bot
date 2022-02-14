@@ -37,9 +37,11 @@ The column accepts one or more of the following values:
 ### Specific user permissions
 You can also create commands that can only be invoked by a single specific user. To do that use the value `usr:<username>`, for example: `usr:paulasantamaria`
 
-## Command view
-Navigate to /commands to get a list of every public command. Your viewers can use it to see the available commands.
-Also, you can navigate to /commands?mode=image to get a ready-to-download image you can add to your Twitch panels.
+## Commands view
+Navigate to `/commands` to get a list of every public command. Your viewers can use it to see the available commands.
+Also, you can navigate to `/commands?mode=image` to get a ready-to-download image you can add to your Twitch panels.
+
+![A page that shows the list of commands](https://user-images.githubusercontent.com/2507959/153897942-8c6b40ab-cab8-4d2c-85c4-2c53c4050306.png)
 
 ## Scripted commands
 You can specify the type of command in the "Type" column. Available options are:
@@ -168,3 +170,6 @@ NOTION_VERSION=2021-08-16
 ```
 When running the project locally using `npm run dev`, you should set the environment variables within a `.env` file in the root. 
 
+
+## Extend it 
+The project is designed to be easily extensible. To know more: [AchoBot wiki - Extend AchoBot](https://github.com/pawap90/acho-bot/wiki/Extend-AchoBot)
