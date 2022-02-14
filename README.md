@@ -144,12 +144,15 @@ npm install
 npm run dev
 ```
 
-## Test
+### Test
 To run the available tests, use:
 
 ```
 npm test
 ```
+
+### Extend it 
+The project is designed to be easily extensible. To know more: [AchoBot wiki - Extend AchoBot](https://github.com/pawap90/acho-bot/wiki/Extend-AchoBot)
 
 ## Environment variables
 These are the environment variables required to run the project. Make sure to set the values with your own data.
@@ -169,7 +172,3 @@ NOTION_DATABASEID=<your-notion-database-id>
 NOTION_VERSION=2021-08-16
 ```
 When running the project locally using `npm run dev`, you should set the environment variables within a `.env` file in the root. 
-
-
-## Extend it 
-The project is designed to be easily extensible. To know more: [AchoBot wiki - Extend AchoBot](https://github.com/pawap90/acho-bot/wiki/Extend-AchoBot)
