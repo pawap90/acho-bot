@@ -9,7 +9,7 @@ Use Notion to configure your Twitch chatbot commands!
   - [Manage your Twitch Chatbot from Notion](#manage-your-twitch-chatbot-from-notion)
   - [Assign Permissions to each Command](#assign-permissions-to-each-command)
     - [Specific user permissions](#specific-user-permissions)
-  - [Command view](#command-view)
+  - [Commands view](#commands-view)
   - [Scripted commands](#scripted-commands)
   - [Single account](#single-account)
   - [Status view](#status-view)
@@ -18,7 +18,8 @@ Use Notion to configure your Twitch chatbot commands!
 - [Quick start](#quick-start)
   - [Dependencies](#dependencies)
   - [Development](#development)
-  - [Test](#test)
+    - [Test](#test)
+    - [Extend it](#extend-it)
   - [Environment variables](#environment-variables)
 
 # Features
