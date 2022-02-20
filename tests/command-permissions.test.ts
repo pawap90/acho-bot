@@ -46,7 +46,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!broadcasterOnlyTest');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate(testBroadcaster.substring(1)));
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate(testBroadcaster.substring(1)));
 
         expect(client.lastMessage).not.toBe('Not enough permissions');
     });
@@ -57,7 +57,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!dynamic');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate(testBroadcaster.substring(1)));
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate(testBroadcaster.substring(1)));
 
         expect(client.lastMessage).not.toBe('Not enough permissions');
     });
@@ -68,7 +68,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!everyone');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate(testBroadcaster.substring(1)));
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate(testBroadcaster.substring(1)));
 
         expect(client.lastMessage).not.toBe('Not enough permissions');
     });
@@ -79,7 +79,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!moderatorOnlyTest');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate(testBroadcaster.substring(1)));
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate(testBroadcaster.substring(1)));
 
         expect(client.lastMessage).toBe('Not enough permissions');
     });
@@ -93,7 +93,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!moderatorOnlyTest');
-        command.execute(testBroadcaster, client, {
+        command!.execute(testBroadcaster, client, {
             username: moderatorUsername,
             mod: true
         });
@@ -109,7 +109,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!dynamic');
-        command.execute(testBroadcaster, client, {
+        command!.execute(testBroadcaster, client, {
             username: moderatorUsername,
             mod: true
         });
@@ -125,7 +125,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!everyone');
-        command.execute(testBroadcaster, client, {
+        command!.execute(testBroadcaster, client, {
             username: moderatorUsername,
             mod: true
         });
@@ -141,7 +141,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!broadcasterOnlyTest');
-        command.execute(testBroadcaster, client, {
+        command!.execute(testBroadcaster, client, {
             username: moderatorUsername,
             mod: true
         });
@@ -155,7 +155,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!subscriberOnlyTest');
-        command.execute(testBroadcaster, client, {
+        command!.execute(testBroadcaster, client, {
             username: 'subscriberOne',
             subscriber: true
         });
@@ -169,7 +169,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!dynamic');
-        command.execute(testBroadcaster, client, {
+        command!.execute(testBroadcaster, client, {
             username: 'subscriberOne',
             subscriber: true
         });
@@ -183,7 +183,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!everyone');
-        command.execute(testBroadcaster, client, {
+        command!.execute(testBroadcaster, client, {
             username: 'subscriberOne',
             subscriber: true
         });
@@ -197,7 +197,7 @@ describe('command permissions ', () => {
         });
 
         const commandModerator = await commandManager.getCommand('!moderatorOnlyTest');
-        commandModerator.execute(testBroadcaster, client, {
+        commandModerator!.execute(testBroadcaster, client, {
             username: 'subscriberOne',
             subscriber: true
         });
@@ -205,7 +205,7 @@ describe('command permissions ', () => {
         expect(client.lastMessage).toBe('Not enough permissions');
 
         const commandBroadcaster = await commandManager.getCommand('!broadcasterOnlyTest');
-        commandBroadcaster.execute(testBroadcaster, client, {
+        commandBroadcaster!.execute(testBroadcaster, client, {
             username: 'subscriberOne',
             subscriber: true
         });
@@ -219,7 +219,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!viewerOnlyTest');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate());
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate());
 
         expect(client.lastMessage).not.toBe('Not enough permissions');
     });
@@ -230,7 +230,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!dynamic');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate());
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate());
 
         expect(client.lastMessage).not.toBe('Not enough permissions');
     });
@@ -241,7 +241,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!everyone');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate());
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate());
 
         expect(client.lastMessage).not.toBe('Not enough permissions');
     });
@@ -252,12 +252,12 @@ describe('command permissions ', () => {
         });
 
         const commandBroadcaster = await commandManager.getCommand('!broadcasterOnlyTest');
-        commandBroadcaster.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate());
+        commandBroadcaster!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate());
 
         expect(client.lastMessage).toBe('Not enough permissions');
 
         const commandUser = await commandManager.getCommand('!userOnlyTest');
-        commandUser.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate());
+        commandUser!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate());
 
         expect(client.lastMessage).toBe('Not enough permissions');
     });
@@ -268,7 +268,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!userOnlyTest');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate('mrtest'));
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate('mrtest'));
 
         expect(client.lastMessage).not.toBe('Not enough permissions');
     });
@@ -279,7 +279,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!dynamic');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate('mrtest'));
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate('mrtest'));
 
         expect(client.lastMessage).not.toBe('Not enough permissions');
     });
@@ -290,7 +290,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!everyone');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate('mrtest'));
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate('mrtest'));
 
         expect(client.lastMessage).not.toBe('Not enough permissions');
     });
@@ -301,7 +301,7 @@ describe('command permissions ', () => {
         });
 
         const command = await commandManager.getCommand('!broadcasterOnlyTest');
-        command.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate('mrtest'));
+        command!.execute(testBroadcaster, client, TmiClientMockHelper.createChatUserstate('mrtest'));
 
         expect(client.lastMessage).toBe('Not enough permissions');
     });

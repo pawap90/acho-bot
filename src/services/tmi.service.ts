@@ -19,7 +19,7 @@ export default class TmiService {
 
                 const command = await this.commandManager.getCommand(message.toLowerCase().trim());
                 if (command) {
-                    command.execute(channel, client, tags);
+                    command.execute(channel, client, tags, message);
                 }
             });
 
