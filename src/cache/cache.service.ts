@@ -5,4 +5,4 @@ import * as FlatCache from 'flat-cache';
 export const AppCache = new NodeCache();
 
 /** Disk cache. Cached values will still be available after the server restarts */
-export const DurableCache = FlatCache.load("ACHOBOT_DISK_CACHE");
+export const DurableCache = FlatCache.load('ACHOBOT_DISK_CACHE');
