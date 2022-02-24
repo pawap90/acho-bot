@@ -35,7 +35,7 @@ describe('built-in help command ', () => {
         const client = TmiClientMockHelper.createClient();
         const command = await commandManager.getCommand('!help');
 
-        command.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
+        command!.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
 
         expect(client.lastMessage).toBe('!help');
     });
@@ -47,7 +47,7 @@ describe('built-in help command ', () => {
 
         CommandCache.clear();
 
-        command.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
+        command!.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
 
         // Check if the produced message matches the default lastMessage value of our mock
         // meaning the command didn't produce any messages.
@@ -57,10 +57,10 @@ describe('built-in help command ', () => {
     it('doesnt print private commands with Broadcaster, Moderator or user specific permissions only', async () => {
         const commandManager = new TmiCommandManager({
             loaders: [
-                new BroadcasterOnlyCommandsLoader(), 
-                new ModeratorOnlyCommandsLoader(), 
-                new SpecificUserOnlyCommandsLoader(), 
-                new SubscriberOnlyCommandsLoader(), 
+                new BroadcasterOnlyCommandsLoader(),
+                new ModeratorOnlyCommandsLoader(),
+                new SpecificUserOnlyCommandsLoader(),
+                new SubscriberOnlyCommandsLoader(),
                 new BuiltInCommandsLoader()
             ]
         });
@@ -69,7 +69,7 @@ describe('built-in help command ', () => {
         const client = TmiClientMockHelper.createClient();
         const command = await commandManager.getCommand('!help');
 
-        command.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
+        command!.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
 
         expect(client.lastMessage).toBe('!help, !subscriberOnlyTest');
     });
@@ -78,7 +78,7 @@ describe('built-in help command ', () => {
         const commandManager = new TmiCommandManager({
             loaders: [
                 new MixedPermissionsCommandsLoader(),
-                new ModeratorOnlyCommandsLoader(), 
+                new ModeratorOnlyCommandsLoader(),
                 new BuiltInCommandsLoader()
             ]
         });
@@ -87,7 +87,7 @@ describe('built-in help command ', () => {
         const client = TmiClientMockHelper.createClient();
         const command = await commandManager.getCommand('!help');
 
-        command.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
+        command!.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
 
         expect(client.lastMessage).toBe('!broadcasterSubscriber, !help, !moderatorViewer, !userSubscriber');
     });

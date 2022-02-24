@@ -13,11 +13,11 @@ export interface ITmiCommand {
     name: string;
     description: string;
     permissions: Permissions[];
-    execute(channel: string, client: TmiClient, tags: TmiChatUserState): void;
+    execute(channel: string, client: TmiClient, tags: TmiChatUserState, message?: string): void;
 }
 
-export type TmiCommandDictionary = { 
-    [key: string]: ITmiCommand 
+export type TmiCommandDictionary = {
+    [key: string]: ITmiCommand
 }
 
 export interface ICommandLoader {

@@ -34,7 +34,7 @@ describe('built-in refresh command ', () => {
         const client = TmiClientMockHelper.createClient(testChannelName);
         const command = await commandManager.getCommand('!refresh');
 
-        command.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate(testChannelName.substring(1)));
+        command!.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate(testChannelName.substring(1)));
 
         expect(CommandCache.get()).toBe(null);
     });
@@ -44,12 +44,12 @@ describe('built-in refresh command ', () => {
         const client = TmiClientMockHelper.createClient(testChannelName);
         const command = await commandManager.getCommand('!refresh');
 
-        command.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate(testChannelName.substring(1)));
+        command!.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate(testChannelName.substring(1)));
 
         expect(CommandCache.get()).toBe(null);
 
         const newCommand = await commandManager.getCommand('!help');
-        newCommand.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate(testChannelName.substring(1)));
+        newCommand!.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate(testChannelName.substring(1)));
 
         expect(CommandCache.get()).not.toBe(null);
         expect(client.lastMessage).toBe('!help');
@@ -61,7 +61,7 @@ describe('built-in refresh command ', () => {
         const client = TmiClientMockHelper.createClient(testChannelName);
         const command = await commandManager.getCommand('!refresh');
 
-        command.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
+        command!.execute(testChannelName, client, TmiClientMockHelper.createChatUserstate());
 
         expect(client.lastMessage).toBe('Not enough permissions');
     });

@@ -11,10 +11,10 @@ export class TmiCommandManager {
 
     async getCommands(): Promise<TmiCommandDictionary> {
         const cachedCommands = CommandCache.get();
-        
-        if (!cachedCommands) 
+
+        if (!cachedCommands)
             return await this.loadCommands();
-        
+
         return cachedCommands;
     }
 
@@ -31,7 +31,10 @@ export class TmiCommandManager {
         return commandDictionary;
     }
 
-    async getCommand(name: string): Promise<ITmiCommand> {
-        return (await this.getCommands())[name];
+    async getCommand(name: string): Promise<ITmiCommand | undefined> {
+        const commandName = name.split(' ')[0];
+        const commands = await this.getCommands();
+
+        return Object.values(commands).find(c => c.name.startsWith(commandName));
     }
 }
