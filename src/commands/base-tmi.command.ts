@@ -13,13 +13,14 @@ export abstract class BaseTmiCommand implements ITmiCommand {
         this.permissions = permissions ?? [];
     }
 
-    protected abstract executeLogic(channel: string, client: Client, tags: ChatUserstate): void;
+    protected abstract executeLogic(channel: string, client: Client, tags: ChatUserstate, message: string): void;
 
-    execute(channel: string, client: Client, tags: ChatUserstate): void {
+    execute(channel: string, client: Client, tags: ChatUserstate, message?: string): void {
+        message = message ?? this.name;
         const userPermissions = this.getUserPermissions(client, channel, tags.username, tags.subscriber);
 
         if (this.permissions.length == 0 || userPermissions.some(permission => this.permissions.indexOf(permission) >= 0)) {
-            this.executeLogic(channel, client, tags);
+            this.executeLogic(channel, client, tags, message);
         }
         else
             client.say(channel, 'Not enough permissions');
