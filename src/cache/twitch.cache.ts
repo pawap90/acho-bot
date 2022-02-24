@@ -1,7 +1,7 @@
-import { AppCache } from './cache.service';
+import { DurableCache } from './cache.service';
 
 /** 
- * Twitch tokens memory cache service 
+ * Twitch tokens cache service 
  */
 export default class TwitchCache {
 
@@ -9,18 +9,20 @@ export default class TwitchCache {
     private static readonly TWITCH_REFRESHTOKEN_KEY = 'twitch-refresh-token';
     
     static storeAccessToken(accessToken: string): void {
-        AppCache.set(this.TWITCH_ACCESSTOKEN_KEY, accessToken);
+        DurableCache.setKey(this.TWITCH_ACCESSTOKEN_KEY, accessToken);
+        DurableCache.save(true);
     }
 
     static getAccessToken(): string | undefined {
-        return AppCache.get<string>(this.TWITCH_ACCESSTOKEN_KEY);
+        return DurableCache.getKey(this.TWITCH_ACCESSTOKEN_KEY);
     }
 
     static storeRefreshToken(refreshToken: string): void {
-        AppCache.set(this.TWITCH_REFRESHTOKEN_KEY, refreshToken);
+        DurableCache.setKey(this.TWITCH_REFRESHTOKEN_KEY, refreshToken);
+        DurableCache.save(true);
     }
 
     static getRefreshToken(): string | undefined {
-        return AppCache.get(this.TWITCH_REFRESHTOKEN_KEY);
+        return DurableCache.getKey(this.TWITCH_REFRESHTOKEN_KEY);
     }
 }
