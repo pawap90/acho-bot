@@ -13,6 +13,13 @@ type NotionCommand = {
     Example: string
 };
 
+enum CommandType {
+    Text = 'Text',
+    Script = 'Script'
+}
+
+const DEFAULT_COMMAND_TYPE = CommandType.Text;
+
 export class NotionCommandsLoader implements ICommandLoader {
     loadedCommands: NotionCommand[] = [];
 
@@ -31,6 +38,7 @@ export class NotionCommandsLoader implements ICommandLoader {
 
         for (let i = 0; i < this.loadedCommands.length; i++) {
             const command = this.loadedCommands[i];
+            command.Type = command.Type || DEFAULT_COMMAND_TYPE;
 
             let permissions: string[] = [];
             if (command.Permissions && command.Permissions.length > 0)
@@ -45,9 +53,9 @@ export class NotionCommandsLoader implements ICommandLoader {
 
     private createCommandInstance(command: NotionCommand, permissions: string[]): AchoBotDynamicCommand {
         switch (command.Type) {
-        case 'Text':
+        case CommandType.Text:
             return new AchoBotDynamicTextCommand(command.CommandName, command.Description, command.Response, permissions);
-        case 'Script':
+        case CommandType.Script:
             return new AchoBotDynamicScriptCommand(command.CommandName, command.Description, command.Response, permissions);
         default:
             throw new Error('Unrecognized command type');
